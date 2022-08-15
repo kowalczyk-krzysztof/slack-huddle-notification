@@ -30,8 +30,8 @@ app.command(SubscribeEvent.UNSUBSCRIBE, async ({ command, ack }) => {
   await app.start();
   console.log(`EvoCoffee is running on port: ${process.env.PORT}`);
   await connect(process.env.MONGO_CONNECTION_STRING as string).then(() => {
-    console.log(`MongoDB connected ${Date.now()}`);
+    console.log(`MongoDB connected: ${new Date(Date.now()).toISOString()}`);
     huddleCron.start();
-    console.log(`Huddle CRON started ${Date.now()}`);
+    console.log(`Huddle CRON started: ${new Date(Date.now()).toISOString()}`);
   });
 })();
