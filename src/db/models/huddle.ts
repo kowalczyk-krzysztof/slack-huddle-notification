@@ -1,5 +1,5 @@
-import { Schema, model } from 'mongoose';
-import { HuddleDocument } from '../../lib';
+import { Schema, model } from 'mongoose'
+import { HuddleDocument } from '../../lib'
 
 const huddleSchema = new Schema<HuddleDocument>({
   call_id: {
@@ -9,13 +9,13 @@ const huddleSchema = new Schema<HuddleDocument>({
   },
   members: {
     type: [String],
-    default: null,
+    default: [],
   },
   notificationSent: {
     type: Boolean,
     required: true,
     default: false,
   },
-});
+})
 
-export const Huddle = model<HuddleDocument>('Huddle', huddleSchema);
+export const Huddle = model<HuddleDocument>('Huddle', huddleSchema)

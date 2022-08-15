@@ -1,1 +1,1 @@
-export * from './activeHuddleNotification';
+export * from './activeHuddleNotification'

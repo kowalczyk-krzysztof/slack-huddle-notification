@@ -1,5 +1,5 @@
-import { Schema, model } from 'mongoose';
-import { UserDocument } from '../../lib';
+import { Schema, model } from 'mongoose'
+import { UserDocument } from '../../lib'
 
 const userSchema = new Schema<UserDocument>({
   user_id: {
@@ -12,6 +12,6 @@ const userSchema = new Schema<UserDocument>({
     required: true,
     default: false,
   },
-});
+})
 
-export const User = model<UserDocument>('User', userSchema);
+export const User = model<UserDocument>('User', userSchema)
