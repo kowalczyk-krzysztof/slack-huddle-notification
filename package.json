@@ -1,0 +1,18 @@
+{
+  "name": "evocoffee",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsc -w",
+    "start": "nodemon ./dist/index.js"
+  },
+  "keywords": [],
+  "author": "Krzysztof Kowalczyk",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@slack/bolt": "^3.12.1",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1"
+  }
+}
