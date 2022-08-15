@@ -21,3 +21,8 @@ export type HuddleDocument = {
   readonly notificationSent: boolean;
   readonly hasEnded: boolean;
 };
+
+export enum SubscribeEvent {
+  SUBSCRIBE = '/evosub',
+  UNSUBSCRIBE = '/evounsub',
+}
