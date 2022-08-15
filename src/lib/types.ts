@@ -14,3 +14,10 @@ export type HuddleAPIResponse = {
 export enum HuddleApiErrors {
   INVALID_AUTH = 'invalid_auth',
 }
+
+export type HuddleDocument = {
+  readonly call_id: string;
+  readonly members: ReadonlyArray<string> | null;
+  readonly notificationSent: boolean;
+  readonly hasEnded: boolean;
+};
