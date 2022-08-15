@@ -3,6 +3,7 @@ import { config } from 'dotenv';
 import { subscribe } from './commands';
 import { huddleCron } from './cron';
 import { SubscribeEvent } from './lib';
+import { connect } from 'mongoose';
 
 config();
 
@@ -28,6 +29,9 @@ app.command(SubscribeEvent.UNSUBSCRIBE, async ({ command, ack }) => {
 (async () => {
   await app.start();
   console.log(`EvoCoffee is running on port: ${process.env.PORT}`);
-  huddleCron.start();
-  console.log(`Huddle CRON started ${Date.now()}`);
+  await connect(process.env.MONGO_CONNECTION_STRING as string).then(() => {
+    console.log(`MongoDB connected ${Date.now()}`);
+    huddleCron.start();
+    console.log(`Huddle CRON started ${Date.now()}`);
+  });
 })();

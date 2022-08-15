@@ -1,7 +1,7 @@
 import { AckFn, RespondArguments, SlashCommand } from '@slack/bolt';
 import { app } from '..';
+import { User } from '../db/models';
 import { SubscribeEvent } from '../lib';
-import { userDb } from '../notifications';
 
 export const subscribe = async (
   command: SlashCommand,
@@ -11,7 +11,13 @@ export const subscribe = async (
   await ack();
   const isSubEvent = type === SubscribeEvent.SUBSCRIBE;
   const { user_id } = command;
-  userDb.set(user_id, isSubEvent ? true : false);
+  const user = await User.findOne({ user_id });
+
+  if (user) {
+    user.isSubscribing = isSubEvent;
+    await user.save();
+  } else User.create({ user_id, isSubscribing: isSubEvent });
+
   await app.client.chat.postMessage({
     channel: user_id,
     text: isSubEvent
