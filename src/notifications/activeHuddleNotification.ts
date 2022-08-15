@@ -28,7 +28,7 @@ export const activeHuddleNotification = async (activeHuddle: HuddleInfo) => {
     sendNotifications(
       await Huddle.create({
         call_id,
-        members: active_members,
+        members: active_members ?? [],
         notificationSent: false,
       })
     )
