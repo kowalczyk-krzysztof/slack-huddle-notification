@@ -10,6 +10,7 @@ const huddleSchema = new Schema<HuddleDocument>({
   members: {
     type: [String],
     default: [],
+    required: true,
   },
   notificationSent: {
     type: Boolean,
