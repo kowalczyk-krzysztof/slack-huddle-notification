@@ -39,11 +39,34 @@ CHANNEL_ID=C03T0K143RQ
 TEAM_ID=T03T0K10A2W
 ```
 
+## Creating a bot account (dev environment)
+1. Go to [Slack Apps page](https://api.slack.com/apps?new_app)
+2. Click `Create New App` button and select `From an app manifest`
+3. Select a workspace - if you don't see your desired workspace, click `Sign into a different workspace` and sign in
+4. Click `Next` and paste the contents of `manifest.yml` found in the root directory in this repository into the `YAML` textarea
+5. Review the changes if you wish and click `Create` 
+6. In the `Basic Information` tab, scroll down to `App-Level Tokens` - this is needed for `Socket Mode` funcionality, which you'll be using in development 
+7. Click `Generate Token and Scopes`. Name the token however you want then click `Add scope` and select `connections:write` and then click `Generate`
+8. You'll see your token, write it down - it will be used as value for `SLACK_APP_TOKEN` env variable
+9. Scroll up to `App Credentials` section and reveal the `Signing Secret` value - it will be used as `SLACK_SIGNING_SECRET` env variable
+10. Scroll up to `Install your app`, click it then click `Install to Workspace` button and then click `Allow`
+11. You'll be shown your `Bot User OAuth Token` - the value is used for `SLACK_BOT_TOKEN` env variable. If lost, you can access it from `Install App` or `OAuth & Permissions` pages
+12. Inside `Slack app` go to a channel of your choice then and go to options
+13. Go to `Integrations` tab and in the `Apps` section click `Add an App` and select your app. Steps 12 and 13 are shown on the GIF below
+![Code_BvDAiVFSrq](https://user-images.githubusercontent.com/65892118/184701478-8c97b396-de73-4997-95f3-c7295ceadc15.gif)
+
 ## Running the app locally
 
 1. Add an `.env` file in the root directory and fill it according to `template.env`
-2. `npm install`
-3. `npm run dev` to compile `.ts` files in watch mode
-4. `npm start`
+2. Run your local MongoDB and fill the `MONGO_CONNECTION_STRING` env variable
+```
+MONGO_CONNECTION_STRING=mongodb://localhost:27017/{database_name}
+```
+  Or connect to a remote database
 
-## TODO: Explain how to create a bot account
+3. `npm install`
+4. `npm run dev` to compile `.ts` files in watch mode
+5. `npm start`
+
+## TODO: Add deployment info
+
