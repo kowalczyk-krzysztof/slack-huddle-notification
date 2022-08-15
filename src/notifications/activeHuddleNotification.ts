@@ -10,7 +10,7 @@ const sendNotifications = async (huddle: HydratedDocument<HuddleDocument>) => {
       if (!huddle.members?.includes(user_id) && isSubscribing) {
         await app.client.chat.postMessage({
           channel: user_id,
-          text: `Huddle has started`,
+          text: `A Huddle has just started!`,
         });
       }
     })
@@ -21,18 +21,16 @@ const sendNotifications = async (huddle: HydratedDocument<HuddleDocument>) => {
 };
 
 export const activeHuddleNotification = async (activeHuddle?: HuddleInfo) => {
-  if (activeHuddle) {
-    const { call_id, active_members } = activeHuddle;
-    const huddle = await Huddle.findOne({ call_id });
-    if (huddle && !huddle?.notificationSent) sendNotifications(huddle);
-    else if (!huddle) {
-      const newHuddle = await Huddle.create({
+  if (!activeHuddle) return;
+  const { call_id, active_members } = activeHuddle;
+  const huddle = await Huddle.findOne({ call_id });
+  if (huddle && !huddle.notificationSent) sendNotifications(huddle);
+  else if (!huddle)
+    sendNotifications(
+      await Huddle.create({
         call_id,
         members: active_members,
         notificationSent: false,
-        hasEnded: false,
-      });
-      sendNotifications(newHuddle);
-    }
-  }
+      })
+    );
 };

@@ -16,7 +16,7 @@ export const subscribe = async (
   if (user) {
     user.isSubscribing = isSubEvent;
     await user.save();
-  } else User.create({ user_id, isSubscribing: isSubEvent });
+  } else await User.create({ user_id, isSubscribing: isSubEvent });
 
   await app.client.chat.postMessage({
     channel: user_id,
