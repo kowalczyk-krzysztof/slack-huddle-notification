@@ -9,7 +9,7 @@ export const fetchHuddlesInfo = async () => {
       token: process.env.SLACK_USER_TOKEN,
     },
     {
-      // TODO: Figure out which part of cookie is needed
+      // Both token in request body and cookie need to be present. The keys required in cookie are: "x" and "d"
       headers: {
         Cookie: process.env.COOKIE as string,
       },
