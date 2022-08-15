@@ -42,7 +42,8 @@ TEAM_ID=T03T0K10A2W
 ## Running the app locally
 
 1. Add an `.env` file in the root directory and fill it according to `template.env`
-2. `npm run dev` to compile `.ts` files in watch mode
-3. `npm start`
+2. `npm install`
+3. `npm run dev` to compile `.ts` files in watch mode
+4. `npm start`
 
 ## TODO: Explain how to create a bot account

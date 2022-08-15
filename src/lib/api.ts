@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { HuddleAPIResponse } from './types';
+import { HuddleApiErrors, HuddleAPIResponse } from './types';
 
 export const fetchHuddlesInfo = async () => {
   const { data }: { data: HuddleAPIResponse } = await axios.post(
@@ -16,4 +16,14 @@ export const fetchHuddlesInfo = async () => {
     }
   );
   return data;
+};
+
+export const apiErrorHandler = (error?: HuddleApiErrors) => {
+  // TOOD: Notify bot owner or figure out something else
+  switch (error) {
+    case HuddleApiErrors.INVALID_AUTH:
+    default:
+      console.log(error);
+      break;
+  }
 };

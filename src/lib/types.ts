@@ -7,6 +7,10 @@ export type HuddleInfo = {
 
 export type HuddleAPIResponse = {
   readonly ok: boolean;
-  readonly error?: string;
+  readonly error?: HuddleApiErrors;
   readonly huddles?: ReadonlyArray<HuddleInfo>;
 };
+
+export enum HuddleApiErrors {
+  INVALID_AUTH = 'invalid_auth',
+}

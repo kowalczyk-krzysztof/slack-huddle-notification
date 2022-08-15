@@ -1,5 +1,5 @@
 import { CronJob } from 'cron';
-import { fetchHuddlesInfo } from '../lib';
+import { apiErrorHandler, fetchHuddlesInfo } from '../lib';
 
 export const huddleCron = new CronJob('*/10 * * * * *', async () => {
   const data = await fetchHuddlesInfo();
@@ -10,6 +10,6 @@ export const huddleCron = new CronJob('*/10 * * * * *', async () => {
     // TODO: Notify users
     console.log(isHuddleActive);
   } else {
-    console.log(data.error);
+    apiErrorHandler(data?.error);
   }
 });
