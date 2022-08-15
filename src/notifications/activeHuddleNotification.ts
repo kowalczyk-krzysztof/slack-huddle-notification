@@ -1,38 +1,38 @@
+import { HydratedDocument } from 'mongoose';
 import { app } from '..';
+import { Huddle, User } from '../db/models';
 import { HuddleDocument, HuddleInfo } from '../lib';
 
-// TODO: Replace this and logic related to this with real database
-const db = new Map<string, HuddleDocument>();
-export const userDb = new Map<string, boolean>();
-
-const sendNotifications = async (huddle: HuddleDocument) => {
+const sendNotifications = async (huddle: HydratedDocument<HuddleDocument>) => {
+  const users = await User.find({ isSubscribing: true });
   await Promise.all(
-    Array.from(userDb).map(async ([key, value]: [string, boolean]) => {
-      if (!huddle.members?.includes(key) && value) {
+    users.map(async ({ user_id, isSubscribing }) => {
+      if (!huddle.members?.includes(user_id) && isSubscribing) {
         await app.client.chat.postMessage({
-          channel: key,
+          channel: user_id,
           text: `Huddle has started`,
         });
       }
     })
-  ).then(() => {
-    db.set(huddle.call_id, { ...huddle, notificationSent: true });
+  ).then(async () => {
+    huddle.notificationSent = true;
+    await huddle.save();
   });
 };
 
 export const activeHuddleNotification = async (activeHuddle?: HuddleInfo) => {
   if (activeHuddle) {
     const { call_id, active_members } = activeHuddle;
-    const huddle = db.get(call_id);
-    if (huddle && !huddle.notificationSent) sendNotifications(huddle);
+    const huddle = await Huddle.findOne({ call_id });
+    if (huddle && !huddle?.notificationSent) sendNotifications(huddle);
     else if (!huddle) {
-      db.set(call_id, {
+      const newHuddle = await Huddle.create({
         call_id,
         members: active_members,
         notificationSent: false,
         hasEnded: false,
       });
-      sendNotifications(db.get(call_id) as HuddleDocument);
+      sendNotifications(newHuddle);
     }
   }
 };

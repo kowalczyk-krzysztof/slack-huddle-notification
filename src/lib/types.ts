@@ -18,8 +18,12 @@ export enum HuddleApiErrors {
 export type HuddleDocument = {
   readonly call_id: string;
   readonly members: ReadonlyArray<string> | null;
-  readonly notificationSent: boolean;
-  readonly hasEnded: boolean;
+  notificationSent: boolean;
+};
+
+export type UserDocument = {
+  readonly user_id: string;
+  isSubscribing: boolean;
 };
 
 export enum SubscribeEvent {
