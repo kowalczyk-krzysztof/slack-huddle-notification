@@ -7,13 +7,7 @@ export const subscribe = async (command: SlashCommand, ack: AckFn<string | Respo
   await ack()
   const isSubEvent = type === SubscribeEvent.SUBSCRIBE
   const { user_id } = command
-  const user = await User.findOne({ user_id })
-
-  if (user) {
-    user.isSubscribing = isSubEvent
-    await user.save()
-  } else await User.create({ user_id, isSubscribing: isSubEvent })
-
+  await User.findOneAndUpdate({ user_id }, { isSubscribing: isSubEvent }, { upsert: true })
   await app.client.chat.postMessage({
     channel: user_id,
     text: isSubEvent
