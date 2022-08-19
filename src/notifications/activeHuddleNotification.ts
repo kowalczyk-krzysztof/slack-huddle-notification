@@ -9,15 +9,14 @@ const sendNotifications = async (huddle: HydratedDocument<HuddleDocument>) => {
   const users = await User.find({ isSubscribing: true })
   await Promise.all(
     users.map(async ({ user_id, isSubscribing }) => {
-      if (!isInHuddleAlready(huddle.members, user_id) && isSubscribing)
+      if (isInHuddleAlready(huddle.members, user_id) && isSubscribing)
         await app.client.chat.postMessage({
           channel: user_id,
           text: `A Huddle has just started!`,
         })
     })
   )
-  huddle.notificationSent = true
-  await huddle.save()
+  await huddle.update({ notificationSent: true })
 }
 
 export const activeHuddleNotification = async (activeHuddle: HuddleInfo) => {
