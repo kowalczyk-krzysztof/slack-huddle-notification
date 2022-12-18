@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-import { HuddleDocument } from '../../lib'
+import { HuddleDocument } from '../../lib/types'
 
 const huddleSchema = new Schema<HuddleDocument>({
   call_id: {

@@ -27,6 +27,6 @@ export type UserDocument = {
 }
 
 export enum SubscribeEvent {
-  SUBSCRIBE = '/evosub',
-  UNSUBSCRIBE = '/evounsub',
+  SUBSCRIBE = '/huddlesub',
+  UNSUBSCRIBE = '/huddleunsub',
 }

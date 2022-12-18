@@ -1,16 +1,16 @@
 display_information:
-  name: EvoCoffee
+  name: slack-huddle-notification
   description: Huddle notifications
   background_color: "#000000"
 features:
   bot_user:
-    display_name: EvoCoffee
+    display_name: HuddleNotification
     always_online: true
   slash_commands:
-    - command: /evosub
+    - command: /huddlesub
       description: Subscribe to Huddles!
       should_escape: false
-    - command: /evounsub
+    - command: /huddleunsub
       description: Unsubscribe from Huddles!
       should_escape: false
 oauth_config:

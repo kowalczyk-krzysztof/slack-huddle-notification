@@ -1,6 +1,8 @@
 import { CronJob } from 'cron'
-import { apiErrorHandler, fetchHuddlesInfo, HuddleInfo } from '../lib'
-import { activeHuddleNotification } from '../notifications'
+import { apiErrorHandler, fetchHuddlesInfo } from '../lib/api'
+import { HuddleInfo } from '../lib/types'
+
+import { activeHuddleNotification } from '../notifications/activeHuddleNotification'
 
 const isActiveHuddleInChosenChannel = (c: HuddleInfo) => c.channel_id === process.env.CHANNEL_ID && c.active_members
 

@@ -1,7 +1,8 @@
 import { HydratedDocument } from 'mongoose'
 import { app } from '..'
-import { Huddle, User } from '../db/models'
-import { HuddleDocument, HuddleInfo } from '../lib'
+import { Huddle } from '../db/models/huddle'
+import { User } from '../db/models/user'
+import { HuddleDocument, HuddleInfo } from '../lib/types'
 
 const isInHuddleAlready = (activeMembers: ReadonlyArray<string>, userId: string) => activeMembers.includes(userId)
 

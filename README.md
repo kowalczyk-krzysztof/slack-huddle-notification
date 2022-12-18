@@ -1,4 +1,6 @@
-# EvoCoffee
+# Slack Huddle Notification
+
+# ⚠️Slack now has implemented built-in notifications when someone starts a huddle in a channel. ⚠️
 
 ## How this app works
 
@@ -53,8 +55,7 @@ TEAM_ID=T03T0K10A2W
 10. Scroll up to `Install your app`, click it then click `Install to Workspace` button and then click `Allow`
 11. You'll be shown your `Bot User OAuth Token` - the value is used for `SLACK_BOT_TOKEN` env variable. If lost, you can access it from `Install App` or `OAuth & Permissions` pages
 12. Inside `Slack app` go to a channel of your choice then and go to options
-13. Go to `Integrations` tab and in the `Apps` section click `Add an App` and select your app. Steps 12 and 13 are shown on the GIF below
-    ![Code_BvDAiVFSrq](https://user-images.githubusercontent.com/65892118/184701478-8c97b396-de73-4997-95f3-c7295ceadc15.gif)
+13. Go to `Integrations` tab and in the `Apps` section click `Add an App` and select your app.
 
 ## Running the app locally
 
@@ -70,5 +71,3 @@ Or connect to a remote database
 3. `npm install`
 4. `npm run dev` to compile `.ts` files in watch mode
 5. `npm start`
-
-## TODO: Add deployment info

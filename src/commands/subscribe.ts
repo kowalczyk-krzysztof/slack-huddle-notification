@@ -1,7 +1,7 @@
 import { AckFn, RespondArguments, SlashCommand } from '@slack/bolt'
 import { app } from '..'
-import { User } from '../db/models'
-import { SubscribeEvent } from '../lib'
+import { User } from '../db/models/user'
+import { SubscribeEvent } from '../lib/types'
 
 export const subscribe = async (command: SlashCommand, ack: AckFn<string | RespondArguments>, type: SubscribeEvent) => {
   await ack()
@@ -11,7 +11,7 @@ export const subscribe = async (command: SlashCommand, ack: AckFn<string | Respo
   await app.client.chat.postMessage({
     channel: user_id,
     text: isSubEvent
-      ? 'Succesfully subscribed to Huddle notifications. Use `/evounsub` to unsubscribe.'
-      : 'Succesfully unsubscribed from Huddle notifications. Use `/evosub` to subscribe again.',
+      ? `Succesfully subscribed to Huddle notifications. Use ${SubscribeEvent.UNSUBSCRIBE} to unsubscribe.`
+      : `Succesfully unsubscribed from Huddle notifications. Use ${SubscribeEvent.SUBSCRIBE} to subscribe again.`,
   })
 }

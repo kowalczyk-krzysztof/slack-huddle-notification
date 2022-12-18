@@ -1,8 +1,8 @@
 import { App } from '@slack/bolt'
 import { config } from 'dotenv'
-import { subscribe } from './commands'
-import { huddleCron } from './cron'
-import { SubscribeEvent } from './lib'
+import { subscribe } from './commands/subscribe'
+import { huddleCron } from './cron/jobs'
+import { SubscribeEvent } from './lib/types'
 import { connect } from 'mongoose'
 
 config()
@@ -25,10 +25,9 @@ app.command(SubscribeEvent.SUBSCRIBE, async ({ command, ack }) => {
 app.command(SubscribeEvent.UNSUBSCRIBE, async ({ command, ack }) => {
   await subscribe(command, ack, SubscribeEvent.UNSUBSCRIBE)
 })
-
 ;(async () => {
   await app.start()
-  console.log(`EvoCoffee is running on port: ${process.env.PORT}`)
+  console.log(`Slack-Huddle-Notification is running on port: ${process.env.PORT}`)
   await connect(process.env.MONGO_CONNECTION_STRING as string)
   console.log(`MongoDB connected: ${new Date(Date.now()).toISOString()}`)
   huddleCron.start()
